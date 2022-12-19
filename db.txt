@@ -1,0 +1,3 @@
+create database aluno;
+use aluno;
+create table aluno(id int AUTO_INCREMENT primary key, nome text not null, nasc text not null, renda decimal not null)

@@ -17,7 +17,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 </head>
 <body>
     <h1>cadastrar aluno</h1>
-    <form action="conectar.php" method="post">
+    <form action="inserir.php" method="post">
         <label for="nome">Insira seu nome:</label><br><br>
         <input type="text" id="nome" name="nome" placeholder="Jacinto Pinto do Rego" required><br><br>
         <label for="renda">Insira sua renda:</label> <br><br>
@@ -28,18 +28,50 @@ $conn = new mysqli($servername, $username, $password, $dbname);
         
     </form>
     <?php
-    $sql = "SELECT * FROM ALUNO";
+    $sql = "SELECT * FROM aluno";
     $result = $conn->query($sql);
     
     if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
-        echo "nome: " . $row["nome"]. " - renda: " . $row["renda"]. " - nascimento: " . $row["nascimento"]. "<br>";
+        echo "nome: " . $row["nome"]. " - renda: " . $row["renda"]. " - nascimento: " . $row["nasc"]. "<button class='botaoApagar' id=".$row["id"].">apagar</button>  <button class='botaoAtualizar' id=".$row["id"].">atualizar</button> <br>";
     }
     } else {
     echo "0 results";
     }
     $conn->close();
     ?>
+
+    <script>
+        botaoApagar = document.querySelectorAll(".botaoApagar");
+        botaoApagar.forEach(e => {
+            e.addEventListener("click", () => {
+                window.location.href = `delete.php?id=${e.id}`;
+            })
+        })
+
+        botaoAtualizar = document.querySelectorAll(".botaoAtualizar");
+        botaoAtualizar.forEach(e => {
+            e.addEventListener("click", () => {
+                window.location.href = `atualizar.php?id=${e.id}`;
+            })
+        })
+    </script>
+
+
+
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
